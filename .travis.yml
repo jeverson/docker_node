@@ -7,3 +7,15 @@ before_install:
 
 script:
     - docker run -e CI=true jmor/docker-node npm run test
+
+deploy:
+    provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "docker-node"
+    env: "DockerNode-env"
+    bucket_name: "elasticbeanstalk-us-east-2-640066151654"
+    bucket_path: "docker-node"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
